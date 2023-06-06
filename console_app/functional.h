@@ -3,7 +3,7 @@
 #ifndef FUNCTIONAL_H_
 #define FUNCTIONAL_H_
 
-// файл с дополнительными функциями
+// ГґГ Г©Г« Г± Г¤Г®ГЇГ®Г«Г­ГЁГІГҐГ«ГјГ­Г»Г¬ГЁ ГґГіГ­ГЄГ¶ГЁГїГ¬ГЁ
 
 
 #include <map>
@@ -22,7 +22,7 @@ std::map<int, Room> rooms;
 void show_tourists() {
 	if (tourists.empty()) std::cout << "no information about tourists" << std::endl;
 	else {
-		for (auto p = tourists.begin(); p != tourists.cend(); p++) {
+		for (auto p = tourists.cbegin(); p != tourists.cend(); p++) {
 			std::cout << p->second << std::endl;
 		}
 	}
@@ -32,7 +32,7 @@ void show_tourists() {
 void show_rooms() {
 	if (rooms.empty()) std::cout << "no information about rooms" << std::endl;
 	else {
-		for (auto p = rooms.begin(); p != rooms.cend(); p++) {
+		for (auto p = rooms.cbegin(); p != rooms.cend(); p++) {
 			std::cout << p->second << std::endl;
 		}
 	}
@@ -61,7 +61,7 @@ void add_room() {
 	}
 
 	int key = value.get_room_number();
-	rooms.insert(std::pair<int, Room>(key, value)); // если элемент с таким ключом уже существует, то вернётся на него указатель
+	rooms.insert(std::pair<int, Room>(key, value)); // ГҐГ±Г«ГЁ ГЅГ«ГҐГ¬ГҐГ­ГІ Г± ГІГ ГЄГЁГ¬ ГЄГ«ГѕГ·Г®Г¬ ГіГ¦ГҐ Г±ГіГ№ГҐГ±ГІГўГіГҐГІ, ГІГ® ГўГҐГ°Г­ВёГІГ±Гї Г­Г  Г­ГҐГЈГ® ГіГЄГ Г§Г ГІГҐГ«Гј
 }
 
 //5.Deleting information about a tourist by last name and first name entered from the keyboard.
@@ -121,15 +121,12 @@ void write_tourist_file() {
 	}
 	else {
 		std::fstream of("./Turist.txt", std::fstream::out);
-			if (of.is_open()) {
-				for (auto p = tourists.cbegin(); p != tourists.cend(); p++) {
-					of << p->second << std::endl;
-				}
-				std::cout << "information about tourists was recorded" << std::endl;
-			}
-			else {
-				std::cout << "could not open the file for writing" << std::endl;
-			}
+		if (of.is_open()) {
+			for (auto p = tourists.cbegin(); p != tourists.cend(); p++)
+				of << p->second << std::endl;
+			std::cout << "information about tourists was recorded" << std::endl;
+		}
+		else std::cout << "could not open the file for writing" << std::endl;
 	}
 	
 }
@@ -142,14 +139,11 @@ void write_room_file() {
 	else {
 		std::fstream of("./Room.txt", std::fstream::out);
 			if (of.is_open()) {
-				for (auto p = rooms.cbegin(); p != rooms.cend(); p++) {
+				for (auto p = rooms.cbegin(); p != rooms.cend(); p++)
 					of << p->second << std::endl;
-				}
 				std::cout << "information about rooms was recorded" << std::endl;
 			}
-			else {
-				std::cout << "could not open the file for writing" << std::endl;
-			}
+			else std::cout << "could not open the file for writing" << std::endl;
 	}
 	
 }
